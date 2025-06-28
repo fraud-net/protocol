@@ -55,17 +55,9 @@ eligibility=Organizations must demonstrate legitimate fraud prevention use cases
 
 The following standardized reason codes should be used in the `reason` field:
 
-- `account-takeover` - Unauthorized access to user accounts
 - `payment-fraud` - Fraudulent payment transactions or chargebacks
-- `identity-theft` - Using stolen personal information
 - `phishing` - Email phishing campaigns or social engineering
 - `spam` - Unsolicited bulk communications
-- `fake-registration` - Creating accounts with false information
-- `bot-activity` - Automated malicious behavior
-- `money-laundering` - Financial crimes and suspicious transactions
-- `scam` - Deceptive schemes to defraud users
-- `harassment` - Abusive or threatening behavior
-- `data-breach` - Unauthorized data access or theft
 - `malware-distribution` - Spreading malicious software
 
 ## Hash Calculation Algorithm
