@@ -13,6 +13,8 @@ All participating organizations must implement:
 1. **Discovery File**: `.well-known/anti-fraud.txt`
    - Contains URL to the organization's fraud intelligence endpoint
    - Must be publicly accessible via HTTPS
+   - Includes violations field describing types of fraudulent behavior tracked
+   - Contains eligibility requirements for network participation
 
 2. **Fraud Intelligence Endpoint**
    - Returns email hashes of known fraudulent accounts
@@ -24,6 +26,8 @@ All participating organizations must implement:
 ```
 endpoint=https://api.example.com/fraud-intelligence
 contact=security@example.com
+violations=Participants included in this database have been found to engage in fraudulent activities including but not limited to: account takeovers, payment fraud, identity theft, phishing campaigns, or other malicious behaviors that pose risks to online platforms and their users.
+eligibility=Organizations must demonstrate legitimate fraud prevention use cases, implement proper data protection measures, maintain accurate records, and agree to use shared intelligence solely for defensive security purposes to be eligible for participation in this network.
 ```
 
 ### Endpoint Response Format
@@ -31,8 +35,14 @@ contact=security@example.com
 ```json
 {
   "email_hashes": [
-    "5d41402abc4b2a76b9719d911017c592",
-    "7d865e959b2466918c9863afca942d0f"
+    {
+      "hash": "5d41402abc4b2a76b9719d911017c592",
+      "reason": "account-takeover"
+    },
+    {
+      "hash": "7d865e959b2466918c9863afca942d0f",
+      "reason": "payment-fraud"
+    }
   ],
   "contact_email": "security@example.com",
   "api_key_request": "security@example.com",
@@ -40,6 +50,23 @@ contact=security@example.com
   "hash_algorithm": "SHA-512"
 }
 ```
+
+### Standardized Reason Codes
+
+The following standardized reason codes should be used in the `reason` field:
+
+- `account-takeover` - Unauthorized access to user accounts
+- `payment-fraud` - Fraudulent payment transactions or chargebacks
+- `identity-theft` - Using stolen personal information
+- `phishing` - Email phishing campaigns or social engineering
+- `spam` - Unsolicited bulk communications
+- `fake-registration` - Creating accounts with false information
+- `bot-activity` - Automated malicious behavior
+- `money-laundering` - Financial crimes and suspicious transactions
+- `scam` - Deceptive schemes to defraud users
+- `harassment` - Abusive or threatening behavior
+- `data-breach` - Unauthorized data access or theft
+- `malware-distribution` - Spreading malicious software
 
 ## Hash Calculation Algorithm
 
