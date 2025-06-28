@@ -1,5 +1,7 @@
 # Fraud-Net Protocol
 
+**Version**: 0.1.0-alpha *(Not Production Ready)*
+
 ## Overview
 
 The Fraud-Net Protocol enables organizations to collaborate in fraud detection and prevention through standardized threat intelligence sharing and coordinated defense mechanisms.
@@ -18,6 +20,7 @@ All participating organizations must implement:
 
 2. **Fraud Intelligence Endpoint**
    - Returns email hashes of known fraudulent accounts
+   - Supports filtering by reason codes via query parameters
    - Provides contact email for API key requests
    - Implements secure authentication for data access
 
@@ -31,6 +34,14 @@ eligibility=Organizations must demonstrate legitimate fraud prevention use cases
 ```
 
 ### Endpoint Response Format
+
+#### Query Parameters
+
+- `reasons` (optional): Comma-separated list of reason codes to filter results
+  - Example: `?reasons=account-takeover,payment-fraud`
+  - If not provided, returns all email hashes
+
+#### Response Format
 
 ```json
 {
@@ -47,7 +58,8 @@ eligibility=Organizations must demonstrate legitimate fraud prevention use cases
   "contact_email": "security@example.com",
   "api_key_request": "security@example.com",
   "hash_count": 1,
-  "hash_algorithm": "SHA-512"
+  "hash_algorithm": "SHA-512",
+  "filtered_reasons": ["account-takeover", "payment-fraud"]
 }
 ```
 
